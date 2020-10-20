@@ -14,6 +14,8 @@ namespace ArcadeFlyer2D
 
         private Texture2D playerimage;
 
+        private Player player;
+
 
         // Initalized the game
         public ArcadeFlyerGame()
@@ -31,6 +33,9 @@ namespace ArcadeFlyer2D
 
             // Make mouse visible
             IsMouseVisible = true;
+
+            Vector2 position = new Vector2(0.0f, 0.0f);
+            player = new Player(this, position);
         }
 
         // Initialize
@@ -42,7 +47,6 @@ namespace ArcadeFlyer2D
         // Load the content for the game, called automatically on start
         protected override void LoadContent()
         {
-            playerimage = Content.Load<Texture2D>("MainChar");
             // Create the sprite batch
             spriteBatch = new SpriteBatch(GraphicsDevice);
         }
@@ -50,6 +54,8 @@ namespace ArcadeFlyer2D
         // Called every frame
         protected override void Update(GameTime gameTime)
         {   
+            player.Update(gameTime);
+
             // Update base game
             base.Update(gameTime);
         }
@@ -62,8 +68,8 @@ namespace ArcadeFlyer2D
 
             spriteBatch.Begin();
 
-            Rectangle PlayerDestinationRect = new Rectangle(0,0,playerimage.Width, playerimage.Height);
-            spriteBatch.Draw(playerimage, PlayerDestinationRect, Color.White);
+            player.Draw(gameTime, spriteBatch);
+
             spriteBatch.End();
 
         }
