@@ -20,13 +20,13 @@ namespace ArcadeFlyer2D
             }
         }
 
-public Rectangle PostionRectangle
-{
-    get{
-        Rectangle rec = new Rectangle((int)position.X, (int)position.Y, (int)spriteWidth, (int)SpriteHeight);
-        return rec;
-    }
-}
+        public Rectangle PostionRectangle
+        {
+            get{
+                Rectangle rec = new Rectangle((int)position.X, (int)position.Y, (int)spriteWidth, (int)SpriteHeight);
+                return rec;
+            }
+        }
 
 
         public Player(ArcadeFlyerGame root, Vector2 position)
@@ -47,7 +47,7 @@ public Rectangle PostionRectangle
         public void Update(GameTime gameTime)
         {
             KeyboardState currentKeyboardState = Keyboard.GetState();
-            
+
             HandleInput(currentKeyboardState);
         }
 
