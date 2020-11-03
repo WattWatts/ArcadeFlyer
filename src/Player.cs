@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Input;
 namespace ArcadeFlyer2D
 {
     // The player, controlled by the keyboard
-    class Player
+    class Player : Sprite
     {
         // A reference to the game that will contain the player
         private ArcadeFlyerGame root;
@@ -43,7 +43,7 @@ namespace ArcadeFlyer2D
         private float movementSpeed = 4.0f;
 
         // Initialize a player
-        public Player(ArcadeFlyerGame root, Vector2 position)
+        public Player(ArcadeFlyerGame root, Vector2 position) : base(position)
         {
             // Initialize values
             this.root = root;
