@@ -13,13 +13,7 @@ namespace ArcadeFlyer2D
         // The speed at which the player can move
         private float movementSpeed = 4.0f;
 
-        // Minimun time between shots
-        private float projectileCoolDownTime = 0.5f;
-
-        // Current time since shot
-        private float projectileTimer = 0.0f;
-
-        private bool projectileTimerActive = false;
+        private Timer cooldownTimer;
 
         // Initialize a player
         public Player(ArcadeFlyerGame root, Vector2 position) : base(position)
@@ -28,6 +22,8 @@ namespace ArcadeFlyer2D
             this.root = root;
             this.position = position;
             this.SpriteWidth = 128.0f;
+
+            cooldownTimer = new Timer(0.5f);
 
             // Load the content for the player
             LoadContent();
@@ -75,16 +71,15 @@ namespace ArcadeFlyer2D
             }
 
             // If space is pressed, Shoot a shot
-            if (spaceKeyPressed && !projectileTimerActive)
+            if (spaceKeyPressed && !cooldownTimer.Active)
             {
                 Vector2 projectileposition;
                 Vector2 projectileVelocity;
 
                 projectileposition = new Vector2(position.X + (SpriteWidth / 2), position.Y + (SpriteHeight / 2));
                 projectileVelocity = new Vector2(10.0f, 0.0f);
-                root.FireProjectile(projectileposition, projectileVelocity);
-                projectileTimerActive = true;
-                projectileTimer = 0f;
+                root.FireProjectile(projectileposition, projectileVelocity, "player");
+                cooldownTimer.StartTimer();
             }
         }
 
@@ -97,15 +92,7 @@ namespace ArcadeFlyer2D
             // Handle any movement input
             HandleInput(currentKeyboardState);
 
-            if(projectileTimerActive)
-            {
-                projectileTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
-
-                if (projectileTimer > projectileCoolDownTime)
-                {
-                    projectileTimerActive = false;
-                }
-            }
+            cooldownTimer.Update(gameTime);
         }
     }
 }
