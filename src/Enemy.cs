@@ -59,7 +59,7 @@ namespace ArcadeFlyer2D
                 Vector2 projectileVelocity = new Vector2();
                 projectileVelocity.X = -5.0f;
                 projectileVelocity.Y = 0f;
-                root.FireProjectile(projectileposition, projectileVelocity, "enemy");
+                root.FireProjectile(projectileposition, projectileVelocity, ProjectileType.Enemy);
             }
         }
     }
