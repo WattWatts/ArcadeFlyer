@@ -33,7 +33,7 @@ namespace ArcadeFlyer2D
         public void LoadContent()
         {
             // Get the MainChar image
-            this.SpriteImage = root.Content.Load<Texture2D>("MainChar");
+            this.SpriteImage = root.Content.Load<Texture2D>("PlayerUpdated");
         }
 
         // Update position based on input

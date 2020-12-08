@@ -33,7 +33,7 @@ namespace ArcadeFlyer2D
         public void LoadContent()
         {
             // Get the Enemy image
-            this.SpriteImage = root.Content.Load<Texture2D>("Enemy");
+            this.SpriteImage = root.Content.Load<Texture2D>("EnemyUpdated");
         }
 
         // Called each frame

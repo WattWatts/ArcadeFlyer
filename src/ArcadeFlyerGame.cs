@@ -16,7 +16,7 @@ namespace ArcadeFlyer2D
         // The player
         private Player player;
 
-        private int life = 3;
+        private int life = 4;
 
         private int score = 0;
 
@@ -75,9 +75,10 @@ namespace ArcadeFlyer2D
             enemies = new List<Enemy>();
             
             // Initialize an enemy to be on the right side
+            var randSpawnHeight = new System.Random();
             enemies.Add(new Enemy(this, new Vector2(screenWidth, 0)));
 
-            enemyCreationTimer = new Timer(3.0f);
+            enemyCreationTimer = new Timer(2f);
             enemyCreationTimer.StartTimer();
 
             projectiles = new List<Projectile>();
@@ -150,7 +151,7 @@ namespace ArcadeFlyer2D
                         {
                             projectiles.Remove(p);
                             enemies.Remove(e);
-                            score = score + 1000;
+                            score = score + 1;
                         }
                     }
                 }
@@ -158,7 +159,8 @@ namespace ArcadeFlyer2D
 
             if(!enemyCreationTimer.Active)
             {
-                enemies.Add(new Enemy(this, new Vector2(screenWidth, 0)));
+                var randSpawnHeight = new System.Random();
+            enemies.Add(new Enemy(this, new Vector2(screenWidth, randSpawnHeight.Next(0,(screenHeight-enemyProjectileSprite.Height)))));
 
                 enemyCreationTimer.StartTimer();
             }
@@ -190,10 +192,10 @@ namespace ArcadeFlyer2D
             }
 
 
-            string scoreString = "Score: " + score.ToString();
+            string scoreString = "Eliminations: " + score.ToString();
             string livesString = "Lives: " + life.ToString();
             spriteBatch.DrawString(textFont, scoreString, Vector2.Zero, Color.Black);
-            spriteBatch.DrawString(textFont, livesString, new Vector2(0f, 20f), Color.Black);
+            spriteBatch.DrawString(textFont, livesString, new Vector2(0f, 35f), Color.Black);
 
             if (gameOver)
             {
